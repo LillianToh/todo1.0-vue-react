@@ -19,7 +19,7 @@ class App extends React.Component {
     this.state = {
       item: "",
       list: ["apple", "orange", "jackfruit"],
-      txt: ""
+      txt: "red"
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -34,12 +34,18 @@ class App extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    console.log(this.state);
     const item = {
       id: Math.random(),
       value: this.state.item
     };
     const list = [...this.state.list];
     list.push(item);
+    this.setState({
+      item,
+      list
+    });
+    console.log(this.state);
   }
 
   handleComplete() {
@@ -59,12 +65,11 @@ class App extends React.Component {
               What are you going to do:
               <input
                 type="text"
-                value={this.state.item}
-                onChange={e => this.handleChange("e", e.target.value)}
+                // value={this.state}
+                onChange={e => this.handleChange("item", e.target.value)}
               />
             </label>
           </div>
-          {/* <button onClick={alert("I was clicked")}>Add to List</button> */}
           <button onClick={e => this.handleSubmit(e)}>Add to List</button>
         </form>
 
