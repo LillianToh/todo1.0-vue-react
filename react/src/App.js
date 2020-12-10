@@ -18,9 +18,15 @@ class App extends React.Component {
     super(props);
     this.state = {
       item: "",
-      list: ["apple", "orange", "jackfruit"],
+      list: [
+        { id: 0, value: "apple" },
+        { id: 1, value: "orange" },
+        { id: 2, value: "jackfruit" }
+      ],
       txt: "red"
     };
+
+    // console.log(this.state.list[0])
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleComplete = this.handleComplete.bind(this);
@@ -34,7 +40,7 @@ class App extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    console.log(this.state);
+    // console.log(this.state);
     const item = {
       id: Math.random(),
       value: this.state.item
@@ -65,7 +71,6 @@ class App extends React.Component {
               What are you going to do:
               <input
                 type="text"
-                // value={this.state}
                 onChange={e => this.handleChange("item", e.target.value)}
               />
             </label>
@@ -74,6 +79,10 @@ class App extends React.Component {
         </form>
 
         <ol>
+          {/* <li> {this.state.list[0]} </li>
+          <li> {this.state.list[1]} </li>
+          <li> {this.state.list[2]} </li> */}
+
           {this.state.list.map(e => {
             return (
               <li
