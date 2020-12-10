@@ -18,9 +18,12 @@ class App extends React.Component {
     super(props);
     this.state = {
       item: "",
-      list: ["apple", "orange", "jackfruit"]
+      list: ["apple", "orange", "jackfruit"],
+      txt: ""
     };
+    this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleComplete = this.handleComplete.bind(this);
   }
 
   handleChange(key, value) {
@@ -39,9 +42,11 @@ class App extends React.Component {
     list.push(item);
   }
 
-  // handleComplete() {
-
-  // }
+  handleComplete() {
+    this.setState({
+      txt: "grey"
+    });
+  }
 
   render() {
     return (
@@ -49,23 +54,28 @@ class App extends React.Component {
         <h3>To Do List</h3>
 
         <form>
-          <label>
-            What are you going to do:
-            <input
-              type="text"
-              value={this.state.item}
-              onChange={e => this.handleChange("e", e.target.value)}
-            />
-          </label>
+          <div>
+            <label>
+              What are you going to do:
+              <input
+                type="text"
+                value={this.state.item}
+                onChange={e => this.handleChange("e", e.target.value)}
+              />
+            </label>
+          </div>
+          {/* <button onClick={alert("I was clicked")}>Add to List</button> */}
+          <button onClick={e => this.handleSubmit(e)}>Add to List</button>
         </form>
-
-        {/* <button onClick={alert("I was clicked")}>Add to List</button> */}
-        <button onClick={e => this.handleSubmit(e)}>Add to List</button>
 
         <ol>
           {this.state.list.map(e => {
             return (
-              <li key={e.id} onClick={e => this.handleComplete(e)}>
+              <li
+                key={e.id}
+                style={{ color: this.state.handleComplete }}
+                onClick={() => this.handleComplete()}
+              >
                 {e.value}
               </li>
             );
