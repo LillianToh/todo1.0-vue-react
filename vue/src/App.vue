@@ -11,7 +11,10 @@
       <ul>
         <!-- assign key to input item of the array list -->
         <li v-for="(item, index) in list" :key="index">
-          <span @click="isCompleted = true" :class="{ completed: isCompleted }">
+          <span
+            @click="isCompleted = !isCompleted"
+            :class="{ completed: isCompleted }"
+          >
             {{ index + 1 }}: {{ item.text }}
           </span>
           <button @click="del(index)">x</button>
