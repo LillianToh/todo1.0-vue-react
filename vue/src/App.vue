@@ -11,9 +11,10 @@
       <ul>
         <!-- assign key to input item of the array list -->
         <li v-for="(item, index) in list" :key="index">
-          <span> {{ index + 1 }}: {{ item.text }} </span>
+          <span @click="isCompleted = true" :class="{ completed: isCompleted }">
+            {{ index + 1 }}: {{ item.text }}
+          </span>
           <button @click="del(index)">x</button>
-          <!-- <button v-if="isCompleted" @click="isCompleted=false" :class="{completed: isCompleted}"> strike </button> -->
         </li>
       </ul>
     </div>
@@ -27,9 +28,9 @@ export default {
   data() {
     return {
       list: [
-        { id: 0, text: "Study" },
-        { id: 1, text: "Shower" },
-        { id: 2, text: "Tennis" }
+        { id: 0, text: "Study", completed: false },
+        { id: 1, text: "Shower", completed: false },
+        { id: 2, text: "Tennis", completed: false }
       ],
       newItem: "",
       isCompleted: false
@@ -39,16 +40,13 @@ export default {
     add() {
       this.list.push({
         id: Math.random(),
-        text: this.newItem
+        text: this.newItem,
+        completed: this.isCompleted
       });
     },
     del(index) {
       // delete one item at that index
       this.list.splice(index, 1);
-    },
-    cross(index) {
-      this.isCompleted = true;
-      // param index not being used, currently a boolean...
     }
   }
 };
