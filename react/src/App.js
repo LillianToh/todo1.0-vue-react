@@ -25,8 +25,6 @@ class App extends React.Component {
       ],
       txt: "red"
     };
-
-    // console.log(this.state.list[0])
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleComplete = this.handleComplete.bind(this);
@@ -55,6 +53,7 @@ class App extends React.Component {
   }
 
   handleComplete() {
+    console.log("I was clicked");
     this.setState({
       txt: "grey"
     });
