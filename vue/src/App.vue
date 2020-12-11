@@ -11,6 +11,7 @@
       <ul>
         <!-- assign key to input item of the array list -->
         <li v-for="(item, index) in list" :key="index">
+          <!-- Psuedo: may need a v-for(status, item, index) in list to strike-off individual item -->
           <span
             @click="isCompleted = !isCompleted"
             :class="{ completed: isCompleted }"
