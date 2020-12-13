@@ -11,16 +11,15 @@
       <ul>
         <!-- assign key to input item of the array list -->
         <li v-for="(item, index) in list" :key="index">
-          <!-- Psuedo: may need a v-for(status, item, index) in list to strike-off individual item -->
-          <span
-            @click="isCompleted = !isCompleted"
-            :class="{ completed: isCompleted }"
-          >
+          <input type="checkbox" v-model="item.isCompleted" />
+          <span :class="{ completed: item.isCompleted }">
             {{ index + 1 }}: {{ item.text }}
           </span>
           <button @click="del(index)">x</button>
         </li>
       </ul>
+
+      <button @click="allComplete">WOOHOO!</button>
     </div>
   </div>
 </template>
@@ -32,12 +31,11 @@ export default {
   data() {
     return {
       list: [
-        { id: 0, text: "Study", completed: false },
-        { id: 1, text: "Shower", completed: false },
-        { id: 2, text: "Tennis", completed: false }
+        { id: 0, text: "Study", isCompleted: false },
+        { id: 1, text: "Shower", isCompleted: false },
+        { id: 2, text: "Tennis", isCompleted: false }
       ],
-      newItem: "",
-      isCompleted: false
+      newItem: ""
     };
   },
   methods: {
@@ -45,12 +43,18 @@ export default {
       this.list.push({
         id: Math.random(),
         text: this.newItem,
-        completed: this.isCompleted
+        isCompleted: false
       });
+      this.newItem = "";
     },
     del(index) {
       // delete one item at that index
       this.list.splice(index, 1);
+    },
+    allComplete() {
+      this.list.forEach(item => {
+        item.isCompleted = true;
+      });
     }
   }
 };
