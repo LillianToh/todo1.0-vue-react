@@ -1,12 +1,12 @@
 <template>
-  <div>
+  <div class="container rounded">
     <div>
       <h3>To Do List</h3>
 
       <!-- v-model for two way data binding -->
       <input type="text" v-model="newItem" placeholder="insert to-do" />
-      <p>Click ADD to add " {{ newItem }} " in the list</p>
-      <button @click="add()">ADD</button>
+      <button class="btn btn-primary" @click="add()">+</button>
+      <p>Click + to add " {{ newItem }} " in the list.</p>
 
       <ul>
         <!-- assign key to input item of the array list -->
@@ -15,11 +15,13 @@
           <span :class="{ completed: item.isCompleted }">
             {{ index + 1 }}: {{ item.text }}
           </span>
-          <button @click="del(index)">x</button>
+          <button class="btn btn-outline-dark" @click="del(index)">x</button>
         </li>
       </ul>
 
-      <button @click="allComplete">WOOHOO!</button>
+      <button id="emoji" class="btn btn-warning" @click="allComplete">
+        All Done!
+      </button>
     </div>
   </div>
 </template>
@@ -45,6 +47,7 @@ export default {
         text: this.newItem,
         isCompleted: false
       });
+      this.list.sort();
       this.newItem = "";
     },
     del(index) {
@@ -55,17 +58,32 @@ export default {
       this.list.forEach(item => {
         item.isCompleted = true;
       });
+      var emoji = document.querySelector("#emoji");
+      emoji.innerHTML = "WOOHOO! 🎉";
     }
   }
 };
 </script>
 
 <style>
-h3 {
-  color: red;
-}
-
 .completed {
   text-decoration: line-through;
+}
+
+.container {
+  display: grid;
+  width: 500px;
+  padding: 100px;
+  margin: 35px auto;
+  border: 1px solid black;
+  background-color: palevioletred;
+}
+
+body {
+  background-color: palegoldenrod;
+}
+
+h3 {
+  color: black;
 }
 </style>
